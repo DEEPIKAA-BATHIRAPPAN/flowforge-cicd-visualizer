@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><title>FlowForge | CI/CD Pipeline Visualizer</title><link rel="stylesheet" href="styles.css"></head>
+<body><aside class="sidebar"><div class="brand"><span class="logo">F</span><span><b>flowforge</b><small>DELIVERY CONSOLE</small></span></div><p class="label">WORKSPACE</p><div class="workspace">◈ &nbsp; acme-platform <span>⌄</span></div><p class="label">BUILD & DEPLOY</p><nav><button class="nav active" data-view="pipeline">⌘ &nbsp; Pipeline overview</button><button class="nav" data-view="history">◷ &nbsp; Run history</button><button class="nav" data-view="config">⚙ &nbsp; Configuration</button></nav><div class="sidebar-foot"><span class="green-dot"></span><b>Demo environment</b><small>Local simulation · No cloud connected</small></div></aside>
+<main><header><div class="crumb">Projects <span>/</span> <b>acme-platform</b> <em>DEMO</em></div><div class="top-right"><span class="green-dot"></span> All systems operational</div></header>
+<section id="pipeline" class="view shown"><div class="heading"><div><div class="eyebrow">CONTINUOUS INTEGRATION / CONTINUOUS DELIVERY</div><h1>Pipeline overview</h1><p>From your first commit to a production-ready release.</p></div><button class="primary" id="run">▶ &nbsp; Run pipeline</button></div>
+<div class="stats"><article><small>Last run status</small><strong id="lastStatus">Not run yet</strong><span id="statusPill" class="pill">READY</span></article><article><small>Pipeline duration</small><strong id="duration">—</strong><span>Simulated run time</span></article><article><small>Success rate</small><strong id="success">—</strong><span id="count">0 runs</span></article><article><small>Latest commit</small><strong class="mono" id="commit">a91c0f2</strong><span>feat: improve release flow · main</span></article></div>
+<section class="panel"><div class="panel-head"><div><h2>Delivery pipeline</h2><p>Click any stage to inspect its purpose.</p></div><div class="legend"><span>● Completed</span><span>● Running</span><span>● Pending</span></div></div><div class="stages" id="stages">
+<button class="stage" data-stage="0"><span class="stage-icon purple">⌘</span><span class="state">READY</span><b>Source</b><small>Commit & push</small><footer>Git repository</footer></button><i class="connector"></i>
+<button class="stage" data-stage="1"><span class="stage-icon blue">⚒</span><span class="state">PENDING</span><b>Build</b><small>Install & compile</small><footer>npm run build</footer></button><i class="connector"></i>
+<button class="stage" data-stage="2"><span class="stage-icon green">✓</span><span class="state">PENDING</span><b>Test</b><small>Quality checks</small><footer>Unit tests</footer></button><i class="connector"></i>
+<button class="stage" data-stage="3"><span class="stage-icon amber">◇</span><span class="state">PENDING</span><b>Staging</b><small>Deploy preview</small><footer>Preview env</footer></button><i class="connector"></i>
+<button class="stage" data-stage="4"><span class="stage-icon pink">🚀</span><span class="state">PENDING</span><b>Production</b><small>Release to users</small><footer>Manual approval</footer></button></div>
+<div class="progress-label"><span id="progressText">Ready to run your first pipeline</span><b id="percent">0%</b></div><div class="progress"><span id="bar"></span></div>
+<div class="controls"><label><input type="checkbox" id="fail"> Simulate test failure</label><small>This is a simulation. No real deployment occurs.</small></div></section>
+<div class="lower"><section class="panel"><div class="panel-head"><div><h2>Live execution logs</h2><p>Output from the selected pipeline run.</p></div><button class="subtle" id="clearLogs">Clear logs</button></div><div class="log-head"><span id="logState">● IDLE</span><span id="runId">No active run</span><button id="copyLogs">Copy logs</button></div><div class="logs" id="logs"><div class="empty">⌁<b>Waiting for a pipeline run</b><small>Start a run to watch each stage execute.</small></div></div></section>
+<section class="panel"><div class="panel-head"><div><h2>Recent activity</h2><p>Latest pipeline events.</p></div><button class="subtle" data-open="history">View all</button></div><div id="activity" class="activity empty-activity">Your pipeline activity will appear here.</div></section></div><p class="foot">FlowForge · Interactive CI/CD demo <span>Built for learning · No real infrastructure connected</span></p></section>
+<section id="history" class="view"><div class="heading"><div><div class="eyebrow">OBSERVABILITY</div><h1>Run history</h1><p>Review previous pipeline simulations.</p></div><button class="primary" id="run2">▶ &nbsp; Run new pipeline</button></div><section class="panel"><div class="panel-head"><div><h2>Pipeline runs</h2><p id="historySummary">No runs recorded yet.</p></div><button class="subtle" id="clearHistory">Clear history</button></div><div class="tablewrap"><table><thead><tr><th>RUN</th><th>COMMIT</th><th>STATUS</th><th>DURATION</th><th>WHEN</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty-cell">No pipeline runs yet.</td></tr></tbody></table></div></section><p class="foot">FlowForge · History is kept for this browser session only.</p></section>
+<section id="config" class="view"><div class="heading"><div><div class="eyebrow">PIPELINE SETTINGS</div><h1>Configuration</h1><p>Example workflow stages and release rules.</p></div></div><section class="panel"><div class="panel-head"><div><h2>Example workflow</h2><p>Illustrative YAML — not executed by this visualizer.</p></div><span class="pill">YAML</span></div><pre><span># Example CI/CD workflow</span>
+name: Build, test and deploy
+on: [push, pull_request]
+
+jobs:
+  build:
+    steps:
+      - Checkout source
+      - Install dependencies
+      - Build application
+
+  test:
+    needs: build
+    steps:
+      - Run unit tests
+      - Check code quality
+
+  staging:
+    needs: test
+    steps:
+      - Deploy preview build
+      - Run smoke tests
+
+  production:
+    needs: staging
+    environment: production (approval required)
+    steps:
+      - Wait for manual approval
+      - Deploy release</pre><div class="note"><b>ⓘ &nbsp; Demo configuration</b><p>This is an example only. Later, adapt it to GitHub Actions, GitLab CI, or Bitbucket Pipelines.</p></div></section><p class="foot">FlowForge · Configuration reference</p></section></main>
+<div id="modal" class="backdrop" hidden><div class="dialog"><button id="close" class="close">×</button><div class="eyebrow">HUMAN-IN-THE-LOOP GATE</div><h2>Production approval required</h2><p id="modalText">The pipeline passed staging. Approve the simulated production release?</p><div class="note">This action updates only the demo interface. No application is deployed.</div><button class="primary full" id="approve">Approve production</button><button class="secondary full" id="cancel">Cancel release</button></div></div><div id="toast" class="toast" hidden></div><script src="app.js"></script></body></html>
