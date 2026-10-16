@@ -37,3 +37,21 @@ This is a **simulation**, not a real CI/CD system. It does not execute actual bu
 - `app.js` — interactive simulation
 - `server.js` — dependency-free local web server
 - `package.json` — run scripts
+
+
+
+
+
+## Screenshots
+
+### Pipeline Dashboard
+
+![FlowForge CI/CD Pipeline Dashboard](screenshots/dashboard.png)
+
+### Features
+
+- Visual pipeline stages from Source to Production
+- Simulated build and test execution
+- Failure handling and skipped stages
+- Production approval workflow
+- Pipeline history and execution logs
